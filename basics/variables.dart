@@ -1,5 +1,7 @@
 main() {
-  var someVaraible = false;
+  var randomValue = "10";
+  // randomValue = "sss";
+
   // someVaraible = 500;
 
   /// declaration
@@ -7,6 +9,7 @@ main() {
 
   /// definition
   balance = 200;
+
   // balance = 100.0;
 
   // balance = "200";
@@ -25,7 +28,8 @@ main() {
 
   /// String
 
-  String name = "Some Person";
+  String name = "Some  Person";
+  // name = 10;
 
   /// bool
 
@@ -38,7 +42,8 @@ main() {
   print(thisIsDynamic);
   thisIsDynamic = "5000";
 
-  // var sum = thisIsDynamic;
+  // var sum = thisIsDynamic + 100;
+
   // print(sum);
   thisIsDynamic = false;
 
@@ -47,7 +52,7 @@ main() {
   /// const , final
 
   const pi = 3.14;
-  // pi = 3.141528;
+  // pi = 3.14;
 
   final int gravity = 10;
   // gravity = 10;
