@@ -11,13 +11,14 @@ main() {
   print(students);
 
   var first = students[0];
-  var last = students[3];
+  var last = students[4];
 
   students.add("Jack");
 
   // students.addAll(['jeff', "michael"]);
 
   students.removeAt(0);
+  // students.remove("Ram");
 
   print(students);
   students.toSet();
@@ -31,9 +32,9 @@ main() {
   /// Map
 
   Map<String, dynamic> person = {
-    "age": 22,
+    "age": 22, // Key , Value pair
     "name": "Jeff", // MapEntry
-    "rollNo": 122,
+    "rollNo": 122.0,
   };
 
   var userAge = person["age"];
