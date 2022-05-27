@@ -2,6 +2,13 @@ main() {
   var randomValue = "10";
   // randomValue = "sss";
 
+/*
+this
+is multi 
+line
+
+*/
+
   // someVaraible = 500;
 
   /// declaration
@@ -9,6 +16,7 @@ main() {
 
   /// definition
   balance = 200;
+  // balance = 200.000;
 
   // balance = 100.0;
 
@@ -40,7 +48,7 @@ main() {
   dynamic thisIsDynamic = 1000;
 
   print(thisIsDynamic);
-  thisIsDynamic = "5000";
+  thisIsDynamic = "hawa kura";
 
   // var sum = thisIsDynamic + 100;
 
@@ -56,9 +64,10 @@ main() {
 
   final int gravity = 10;
   // gravity = 10;
-
+  // const time = DateTime.now();
   final currentTime = DateTime.now();
-  // currentTime = DateTime.now();
+
+  final anotherPi = 3.14;
 
   print(currentTime);
 }

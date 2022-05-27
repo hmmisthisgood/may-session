@@ -7,8 +7,11 @@ main() {
   List<String> students = ["Raman", "Deepa", "Sudip", "Sankalp", "Manish"];
 
   for (count; count >= 0;) {
+    count--;
+
     print(count); //9
     count--;
+
     if (count == 4) {
       break;
     }

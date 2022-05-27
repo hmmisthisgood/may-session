@@ -3,11 +3,22 @@ main() {
   /// Set
   /// Map
 
-  var dyhnamicList = [2, 'Ram bahadur', 3, false, 3.4, 10.0];
+  var std = [
+    "Raman",
+    "Sudip",
+    "Raman",
+    1,
+    1,
+    false,
+    1.0,
+    [1, 2, 34]
+  ];
+
+  var dyhnamicList = ['Ram bahadur', 2, 3, false, 3.4, 10.0];
 
   /// exlplicit list definition
-////////////////////////// 0, 1 , 2,3
-  List<String> students = ["Ram", "Sita", "Ram", "Jack", "A1"];
+////////////////////////// 0, 1 , 2,3,4
+  List<String> students = <String>["Ram", "Sita", "Ram", "Jack", "A1"];
   print(students);
 
   var first = students[0];
@@ -32,10 +43,11 @@ main() {
   /// Map
 
   Map<String, dynamic> person = {
+    "rollNo": 122.0,
     "age": 22, // Key , Value pair
     "name": "Jeff", // MapEntry
-    "rollNo": 122.0,
   };
+  MapEntry<String, dynamic> id = MapEntry("id", 1231231);
 
   var userAge = person["age"];
   print(userAge);
@@ -43,5 +55,7 @@ main() {
   person["age"] = 35;
 
   person["birthday"] = "Oct 1";
+
   print(person);
+  person.addEntries([id]);
 }
