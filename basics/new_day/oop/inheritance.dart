@@ -68,6 +68,9 @@ class AdminUser extends CommonUser {
 }
 
 void main() {
+  // var coomonUser = CommonUser(
+  //     id: id, fullname: fullname, age: age, friendCount: friendCount);
+
   var normalUser = NormalUser(i: 123, a: 23, f: "Madan Bhandari", fC: 500);
   print(normalUser.fullname);
 
