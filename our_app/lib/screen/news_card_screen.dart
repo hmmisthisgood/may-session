@@ -5,6 +5,12 @@ class NewsCard extends StatelessWidget {
       "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg";
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
+    print("Screen width is : $width");
+    print("Screen height is $height");
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -19,51 +25,57 @@ class NewsCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    // color: Colors.green,
-                    width: 250,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Mr Jounalist",
-                          style: TextStyle(color: Colors.blue),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          "Real Madrid are the European Champions",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                            // decoration: TextDecoration.lineThrough,
+                  Expanded(
+                    flex: 3,
+                    child: Container(
+                      // color: Colors.green,
+                      // width: 250,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Mr Jounalist",
+                            style: TextStyle(color: Colors.blue),
                           ),
-                        ),
-                        SizedBox(height: 10),
-                        // Row(
-                        //   children: [
-                        //     Text("Econmics"),
-                        //     SizedBox(width: 15),
-                        //     Text("|"),
-                        //     SizedBox(width: 15),
-                        //     Text("31st May 2022"),
-                        //   ],
-                        // ),
-                        Text(
-                          "Economics   |   31 May 2022",
-                          style: TextStyle(color: Colors.grey),
-                        )
-                      ],
+                          SizedBox(height: 10),
+                          Text(
+                            "Real Madrid ",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              // decoration: TextDecoration.lineThrough,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          // Row(
+                          //   children: [
+                          //     Text("Econmics"),
+                          //     SizedBox(width: 15),
+                          //     Text("|"),
+                          //     SizedBox(width: 15),
+                          //     Text("31st May 2022"),
+                          //   ],
+                          // ),
+                          Text(
+                            "Economics   |   31 May 2022",
+                            style: TextStyle(color: Colors.black),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                  Container(
-                    // color: Colors.red,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                        image,
-                        width: 100,
-                        height: 70,
-                        fit: BoxFit.cover,
+                  Flexible(
+                    flex: 1,
+                    child: Container(
+                      // color: Colors.red,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          image,
+                          width: 100,
+                          height: 70,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -80,6 +92,12 @@ class NewsCard extends StatelessWidget {
   }
 }
 
-
 /// ClipRRect = Clip Rounded rectangle
 /// Divider = Draws a line
+///
+///
+
+/// Flexible and Expanded
+/// - Can be used only inside Column and Row
+///  Expaneded tries to occupy as much space as possible
+/// Flexible tries to occupt only space that is required
