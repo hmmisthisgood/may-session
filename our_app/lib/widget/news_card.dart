@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class NewsCard extends StatelessWidget {
   final image =
       "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg";
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;

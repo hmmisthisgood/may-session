@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:our_app/screen/listview_screen.dart';
 
 import 'home.dart';
 import 'screen/row_and_columns_screen.dart';
@@ -16,8 +17,11 @@ class OurApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: "Our app",
-      home: RowAndColumnScreen(),
-      theme: ThemeData(primarySwatch: Colors.purple),
+      home: ListViewScreen(),
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        // scaffoldBackgroundColor: Colors.black.withOpacity(0.3),
+      ),
     );
   }
 }
