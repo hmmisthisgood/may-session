@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:our_app/screen/gridview_screen.dart';
 
 class ListViewScreen extends StatelessWidget {
   final image =
@@ -22,6 +23,11 @@ class ListViewScreen extends StatelessWidget {
     "Madan Bhandari",
   ];
 
+  // Map person = {
+  //   "nickanmes": [],
+  //   "name": "ram bahadur",
+  // };
+
   Widget buildNormalListView() {
     return ListView(
       // scrollDirection: Axis.horizontal,
@@ -38,38 +44,44 @@ class ListViewScreen extends StatelessWidget {
 
   Widget buildListViewWithBuilder() {
     return ListView.builder(
-      itemCount: students.length,
+      itemCount: students.length, //10
       // scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
         final std = students[index];
         print(index);
         print(std);
-        return Container(
-          color: Colors.grey.withOpacity(0.3),
-          margin: EdgeInsets.all(8),
-          padding: EdgeInsets.all(8),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: Image.asset(
-                  "assets/image/wall.jpg",
-                  height: 50,
-                  width: 50,
-                  fit: BoxFit.cover,
+        return InkWell(
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (con) => GridViewScreen()));
+          },
+          child: Container(
+            color: Colors.grey.withOpacity(0.3),
+            margin: EdgeInsets.all(8),
+            padding: EdgeInsets.all(8),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(50),
+                  child: Image.asset(
+                    "assets/image/wall.jpg",
+                    height: 50,
+                    width: 50,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              SizedBox(width: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("${index + 1}"),
-                  SizedBox(height: 10),
-                  Text(std),
-                ],
-              ),
-            ],
+                SizedBox(width: 20),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("${index + 1}"),
+                    SizedBox(height: 10),
+                    Text(std),
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },
