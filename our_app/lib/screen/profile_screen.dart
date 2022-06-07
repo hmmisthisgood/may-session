@@ -2,9 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:our_app/widget/stack_widget.dart';
 
 import '../utils/my_custom_icons.dart';
+import '../widget/ig_profile_gridview.dart';
 import 'gridview_screen.dart';
+import 'misc_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -34,10 +37,11 @@ class ProfileScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Container(
-            height: 300,
-            color: Colors.black.withOpacity(0.1),
-          ),
+          // Container(
+          //   height: 300,
+          //   color: Colors.black.withOpacity(0.1),
+          // ),
+          StackWidget(),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: TabBar(
@@ -84,13 +88,9 @@ class ProfileScreen extends StatelessWidget {
           Expanded(
             child: TabBarView(
               children: [
+                IgProfileGridViewWidget(),
                 GridViewScreen(),
-                Container(
-                  color: Colors.green,
-                ),
-                Container(
-                  color: Color.fromRGBO(100, 100, 150, 1),
-                ),
+                MiscScreen(),
                 Container(
                   color: Color(0xffd2c4df),
                 ),
