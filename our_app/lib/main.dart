@@ -3,6 +3,7 @@ import 'package:our_app/screen/listview_screen.dart';
 
 import 'home.dart';
 import 'screen/ig_screen_with_tabbar.dart';
+import 'screen/login_screen.dart';
 import 'screen/page_view_screen.dart';
 import 'screen/row_and_columns_screen.dart';
 // import 'package:our_app/home.dart';
@@ -19,7 +20,7 @@ class OurApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: "Our app",
-      home: IgProfileScreen(),
+      home: LoginScreen(),
       theme: ThemeData(
         // fontFamily: "Allura",
         primarySwatch: Colors.purple,
