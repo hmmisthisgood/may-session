@@ -26,7 +26,7 @@ class User {
   final String name, username, email, phone, website;
   final Address address;
   final String companyName;
-  final double lat, long;
+  final String lat, long;
   User(
       {required this.idd,
       required this.name,
@@ -48,7 +48,7 @@ class User {
       phone: json['phone'],
       website: json['website'],
       lat: json["address"]["geo"]["lat"],
-      long: json["address"]["geo"]["long"],
+      long: json["address"]["geo"]["lng"], //null
       address: Address.convertFromJson(json['address']),
       companyName: json['company']["name"],
     );
