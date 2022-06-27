@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:our_app/screen/page_view_screen.dart';
+import 'package:our_app/screen/profile_screen.dart';
 import 'package:our_app/widget/common_text_field.dart';
+
+import '../navigation/routes.dart';
+import 'ig_screen_with_tabbar.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -200,6 +205,27 @@ class _LoginScreenState extends State<LoginScreen> {
                     formKey.currentState!.save();
                     bool validated = formKey.currentState!.validate();
                   }
+
+                  /// Navigation/routing
+
+                  // MaterialPageRoute
+                  // CupertinoPageRoute
+
+                  final route =
+                      MaterialPageRoute(builder: (_) => IgProfileScreen());
+
+                  // Navigator.push(context, route);
+
+                  // Navigator.pushReplacement(context, route);
+                  Navigator.pushNamed(context, Routes.listview);
+
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   route,
+                  //   (route) {
+                  //     return false;
+                  //   },
+                  // );
                 },
                 child: Text("Login"),
                 color: Colors.green,
@@ -212,11 +238,10 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-
 ///SafeArea = protects the ui from hardware
 ///
 
-/// form and textfield 
+/// form and textfield
 /// 1. TextField
 /// 2. TextFormField
-/// 3. Form  
+/// 3. Form

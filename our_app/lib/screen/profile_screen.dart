@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:our_app/screen/listview_screen.dart';
 import 'package:our_app/widget/stack_widget.dart';
 
+import '../navigation/routes.dart';
 import '../utils/my_custom_icons.dart';
 import '../widget/ig_profile_gridview.dart';
 import 'gridview_screen.dart';
@@ -25,7 +27,11 @@ class ProfileScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (_) => ListViewScreen()));
+                Navigator.pushNamed(context, Routes.listview);
+              },
               icon: Icon(
                 CupertinoIcons.settings,
                 color: Colors.black,

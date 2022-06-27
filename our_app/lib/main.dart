@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:our_app/screen/listview_screen.dart';
 
 import 'home.dart';
+import 'navigation/our_route_generator.dart';
 import 'screen/ig_screen_with_tabbar.dart';
 import 'screen/login_screen.dart';
 import 'screen/page_view_screen.dart';
@@ -21,6 +22,7 @@ class OurApp extends StatelessWidget {
     return new MaterialApp(
       title: "Our app",
       home: LoginScreen(),
+      onGenerateRoute: ourAwesomeRouteGenerator,
       theme: ThemeData(
         // fontFamily: "Allura",
         primarySwatch: Colors.purple,

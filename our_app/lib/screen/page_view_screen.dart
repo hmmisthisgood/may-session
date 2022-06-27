@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:our_app/screen/ig_screen_with_tabbar.dart';
 
 class PageViewScreen extends StatelessWidget {
   final PageController pageController = PageController();
@@ -55,30 +56,53 @@ class PageViewScreen extends StatelessWidget {
               //         color: Colors.purple,
               //       )
               //     :
-              Container(
-                  height: double.infinity,
-                  width: double.infinity,
-                  child: FadeInImage(
-                    image: AssetImage(currentImage),
-                    imageErrorBuilder: (context, e, s) {
-                      return Center(child: Text("Could not load image"));
-                    },
-                    placeholder: NetworkImage(netImage),
-                    fit: BoxFit.cover,
-                    fadeInDuration: Duration(seconds: 2),
-                  )
-                  //   Image.asset(
-                  //   currentImage,
-                  //   fit: BoxFit.cover,
-                  //   alignment: Alignment.centerLeft,
-                  // ),
-                  );
+              InkWell(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => IgProfileScreen()));
+            },
+            child: Container(
+                height: double.infinity,
+                width: double.infinity,
+                child: FadeInImage(
+                  image: AssetImage(currentImage),
+                  imageErrorBuilder: (context, e, s) {
+                    return Center(child: Text("Could not load image"));
+                  },
+                  placeholder: NetworkImage(netImage),
+                  fit: BoxFit.cover,
+                  fadeInDuration: Duration(seconds: 2),
+                )
+                //   Image.asset(
+                //   currentImage,
+                //   fit: BoxFit.cover,
+                //   alignment: Alignment.centerLeft,
+                // ),
+                ),
+          );
         });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: pageViewWithBuilder());
+    return WillPopScope(
+      onWillPop: () {
+        print("back button presseds");
+        return Future.value(false);
+      },
+      child: Scaffold(
+        appBar: AppBar(
+            // automaticallyImplyLeading: false,
+            // leading: IconButton(
+            //   onPressed: () {
+            //     Navigator.pop(context);
+            //   },
+            //   icon: Icon(Icons.arrow_back_ios_new),
+            // ),
+            ),
+        body: pageViewWithBuilder(),
+      ),
+    );
   }
 }
 
