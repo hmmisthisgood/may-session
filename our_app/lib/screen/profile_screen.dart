@@ -63,7 +63,7 @@ class ProfileScreen extends StatelessWidget {
                 // Text("Home"),
                 // Text("Games"),
                 // Text("Movies"),
-                // Text("Home"),
+                // Text("Home"),IgProfileScreen
                 // Text("Games"),
                 // Text("Movies"),
                 // Text("Home"),

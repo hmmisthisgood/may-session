@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:our_app/screen/page_view_screen.dart';
 import 'package:our_app/screen/profile_screen.dart';
+import 'package:our_app/utils/shared_pref.dart';
 import 'package:our_app/widget/common_text_field.dart';
 
 import '../navigation/routes.dart';
@@ -217,8 +218,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   // Navigator.push(context, route);
 
                   // Navigator.pushReplacement(context, route);
-                  Navigator.pushNamed(context, Routes.listview);
-
+                  Navigator.pushNamed(context, Routes.dashboard);
+                  SharedPref.setHasUserLoggedIn(true);
                   // Navigator.pushAndRemoveUntil(
                   //   context,
                   //   route,
