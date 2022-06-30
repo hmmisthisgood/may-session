@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:sql_app/screen/new_note_screen.dart';
 import 'package:sql_app/service/db_service.dart';
 
 class Homepage extends StatefulWidget {
@@ -25,7 +27,12 @@ class _HomepageState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
-    dbService.configureDb();
+    initDbAndGetNotes();
+  }
+
+  initDbAndGetNotes() async {
+    await dbService.configureDb();
+    getNotes();
   }
 
   getNotes() async {
@@ -39,45 +46,58 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text("Notes")),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/newNote');
+        },
+        child: Icon(Icons.edit),
+      ),
       body: Container(
         width: double.infinity,
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          SizedBox(
-            height: 100,
-          ),
-          MaterialButton(
-            onPressed: () async {
-              // DbService __db = DbService();
-              // await __db.configureDb();
-              // final res = await __db.addNote();
-              // await __db.sqlDb.close();
-              // await __db.addNote();
-              final res = await dbService.addNote();
-              print(res);
-              if (res != 0) {
-                getNotes();
-              }
-            },
-            child: Text("Insert Note"),
-            color: Colors.blue,
-          ),
-          MaterialButton(
-            onPressed: () => getNotes(),
-            child: Text("Get notes"),
-            color: Colors.green,
-          ),
           Expanded(
             child: ListView.builder(
               itemCount: notesList.length,
               itemBuilder: (context, index) {
                 final note = notesList[index];
-                return Column(
-                  children: [
-                    Text(note['title'].toString()),
-                    // Text(note['body'].toString()),
+                final creatdAt = note['createdAt'].toString();
 
-                    Text(note['createdAt'].toString()),
-                  ],
+                final formatted = Jiffy(creatdAt).format("MMMM dd HH:mm");
+                final createdDate = DateTime.parse(creatdAt);
+                // createdDate.difference(DateTime.now()).inDays
+
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => NewNoteScreen(
+                                  note: note,
+                                )));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            note['title'].toString(),
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            note['body'].toString(),
+                          ),
+                          SizedBox(height: 10),
+                          Text(formatted),
+                        ],
+                      ),
+                    ),
+                  ),
                 );
               },
             ),

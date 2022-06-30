@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -75,22 +76,38 @@ phoneNumber VARCHAR
     sqlDb = _db;
   }
 
-  Future<int> addNote() async {
-    //     title VARCHAR(50),
-    // body TEXT,
-    // createdAt VARCHAR,
-    // isDeleted NUMBER,
-    // deletedAt VARCHAR
-    return await sqlDb.insert("notes", {
-      "title": "Charge battery",
-      "body": "please charge the phones battery",
+  Future<int> addNote({String? noteTitle, required String body}) async {
+    return await sqlDb.insert(_notesTable, {
+      "title": noteTitle,
+      "body": body,
       "createdAt": DateTime.now().toString(),
       "isDeleted": false
     });
   }
 
   Future<List<Map<String, Object?>>> getNotes() async {
-    final res = await sqlDb.query("notes");
+    final res = await sqlDb.query(_notesTable);
     return res;
+  }
+
+  updateNote({required int id, required String title, required String body}) {
+    sqlDb.update(
+      _notesTable,
+      {"title": title, "body": body},
+      where: "id?",
+      whereArgs: [id],
+    );
+
+    final updateQuery =
+        '''UPDATE notes SET title = "$title", body = "$body" WHERE id=$id''';
+
+    // sqlDb.rawUpdate(updateQuery);
+  }
+
+  deleteNote(int id) {
+    sqlDb.delete(_notesTable, where: "id?", whereArgs: [id]);
+    final deleteQuery = '''  DELETE FROM notes   WHERE id=$id''';
+
+    // sqlDb.rawDelete(deleteQuery)
   }
 }
