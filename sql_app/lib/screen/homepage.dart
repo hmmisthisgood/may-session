@@ -1,10 +1,6 @@
-import 'package:flutter/gestures.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:sql_app/service/db_service.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -24,93 +20,20 @@ class _HomepageState extends State<Homepage> {
 
   late Database sqlDb;
   List<Map<String, Object?>> notesList = [];
+  DbService dbService = DbService();
 
   @override
   void initState() {
     super.initState();
-    configureDb();
-  }
-
-  configureDb() async {
-    /// get the location/path to create a database
-
-    final dir = await getApplicationDocumentsDirectory();
-
-    ///  /data/user/0/com.example.sql_app/app_flutter
-    final dirPath = dir.path;
-
-    final dbPath = join(dir.path, "our_database.db");
-
-    print(dbPath);
-
-    final _db = await openDatabase(
-      dbPath,
-      version: _dbVersion,
-      onConfigure: (db) {
-        print("1 . on configure");
-
-        try {
-          db.execute('''
-CREATE TABLE If NOT EXISTS notes(
-  id INTEGER PRIMARY KEY  AUTOINCREMENT,
-  title VARCHAR(50),
-  body TEXT,
-  createdAt VARCHAR,
-  isDeleted NUMBER,
-  deletedAt VARCHAR
-);
-''');
-          db.execute('''
-CREATE TABLE IF NOT EXISTS user(
-id INTEGER PRIMARY KEY AUTOINCREMENT,
-fullName VARCHAR(100),
-bio TEXT,
-age INTEGER,
-phoneNumber VARCHAR
-);
-''');
-        } catch (e) {
-          print(e);
-        }
-      },
-      onCreate: (db, version) {
-        print(" on create");
-      },
-      onUpgrade: (db, oldV, newV) {
-        print(" on upgrade");
-      },
-      onDowngrade: (db, oldV, newV) {
-        print(" on downgrade");
-      },
-      onOpen: (db) {
-        print(" on open");
-      },
-    );
-    sqlDb = _db;
-    getNotes();
-  }
-
-  addNote() async {
-    //     title VARCHAR(50),
-    // body TEXT,
-    // createdAt VARCHAR,
-    // isDeleted NUMBER,
-    // deletedAt VARCHAR
-    final res = await sqlDb.insert("notes", {
-      "title": "Charge battery",
-      "body": "please charge the phones battery",
-      "createdAt": DateTime.now().toString(),
-      "isDeleted": false
-    });
-    getNotes();
-    print("inserted: $res");
+    dbService.configureDb();
   }
 
   getNotes() async {
-    final res = await sqlDb.query("notes");
-    notesList = res;
+    final val = await dbService.getNotes();
+
+    notesList = val;
+
     setState(() {});
-    print(res);
   }
 
   @override
@@ -123,16 +46,23 @@ phoneNumber VARCHAR
             height: 100,
           ),
           MaterialButton(
-            onPressed: () {
-              addNote();
+            onPressed: () async {
+              // DbService __db = DbService();
+              // await __db.configureDb();
+              // final res = await __db.addNote();
+              // await __db.sqlDb.close();
+              // await __db.addNote();
+              final res = await dbService.addNote();
+              print(res);
+              if (res != 0) {
+                getNotes();
+              }
             },
             child: Text("Insert Note"),
             color: Colors.blue,
           ),
           MaterialButton(
-            onPressed: () {
-              getNotes();
-            },
+            onPressed: () => getNotes(),
             child: Text("Get notes"),
             color: Colors.green,
           ),
