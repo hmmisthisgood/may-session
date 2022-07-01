@@ -3,9 +3,11 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:sql_app/service/db_service.dart';
 
+import '../model/note.dart';
+
 class NewNoteScreen extends StatefulWidget {
   NewNoteScreen({Key? key, this.note}) : super(key: key);
-  final note;
+  final Note? note;
   @override
   State<NewNoteScreen> createState() => _NewNoteScreenState();
 }
@@ -25,8 +27,8 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
     bodyController = TextEditingController();
 
     if (widget.note != null) {
-      titleController = TextEditingController(text: widget.note['title']);
-      bodyController = TextEditingController(text: widget.note['body']);
+      titleController = TextEditingController(text: widget.note!.title);
+      bodyController = TextEditingController(text: widget.note!.body);
     }
 
     dbService.configureDb();
@@ -36,7 +38,7 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
     if (widget.note != null) {
       final oldNote = widget.note;
       dbService.updateNote(
-          id: oldNote['id'],
+          id: oldNote!.id,
           title: titleController.text,
           body: bodyController.text);
       Navigator.pop(context);

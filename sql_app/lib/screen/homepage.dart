@@ -4,6 +4,8 @@ import 'package:sqflite/sqflite.dart';
 import 'package:sql_app/screen/new_note_screen.dart';
 import 'package:sql_app/service/db_service.dart';
 
+import '../model/note.dart';
+
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
 
@@ -19,7 +21,7 @@ class _HomepageState extends State<Homepage> {
   /// data/user/com.sql_app/iuabgjpabjewgbawg/
 
   List<Map<String, Object?>> notesList = [];
-
+  List<Note> notes = [];
   @override
   void initState() {
     super.initState();
@@ -36,6 +38,7 @@ class _HomepageState extends State<Homepage> {
     DbService dbService = DbService.instance;
 
     final val = await dbService.getNotes();
+    notes = Note.fromList(val);
 
     notesList = val;
 
@@ -57,10 +60,10 @@ class _HomepageState extends State<Homepage> {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Expanded(
             child: ListView.builder(
-              itemCount: notesList.length,
+              itemCount: notes.length,
               itemBuilder: (context, index) {
-                final note = notesList[index];
-                final creatdAt = note['createdAt'].toString();
+                final Note note = notes[index];
+                final creatdAt = note.createdAt;
 
                 final formatted = Jiffy(creatdAt).format("MMMM dd HH:mm");
                 final createdDate = DateTime.parse(creatdAt);
@@ -87,14 +90,13 @@ class _HomepageState extends State<Homepage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                note['title'].toString(),
+                                note.title,
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                               InkWell(
                                 onTap: () async {
-                                  await DbService.instance.deleteNote(
-                                      int.parse(note['id'].toString()));
+                                  await DbService.instance.deleteNote(note.id);
                                   getNotes();
                                 },
                                 child: Icon(
@@ -105,9 +107,7 @@ class _HomepageState extends State<Homepage> {
                             ],
                           ),
                           SizedBox(height: 10),
-                          Text(
-                            note['body'].toString(),
-                          ),
+                          Text(note.body),
                           SizedBox(height: 10),
                           Text(formatted),
                         ],

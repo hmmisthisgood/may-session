@@ -94,7 +94,7 @@ phoneNumber VARCHAR
   }
 
   Future<List<Map<String, Object?>>> getNotes() async {
-    final res = await sqlDb.query(_notesTable);
+    final res = await sqlDb.query(_notesTable, where: 'isDeleted=false');
     return res;
   }
 
@@ -113,7 +113,13 @@ phoneNumber VARCHAR
   }
 
   deleteNote(int id) {
-    return sqlDb.delete(_notesTable, where: "id=?", whereArgs: [id]);
+    /// To actually delete the records, use the line bleow
+    // return sqlDb.delete(_notesTable, where: "id=?", whereArgs: [id]);
+
+    sqlDb.update(_notesTable,
+        {"isDeleted": true, "deletedAt": DateTime.now().toString()},
+        where: "id=?", whereArgs: [id]);
+
     // final deleteQuery = '''  DELETE FROM notes   WHERE id=$id''';
 
     // sqlDb.rawDelete(deleteQuery)
