@@ -15,7 +15,7 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
 
   late TextEditingController bodyController;
 
-  final DbService dbService = DbService();
+  DbService dbService = DbService.instance;
 
   @override
   void initState() {
@@ -32,21 +32,33 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
     dbService.configureDb();
   }
 
-  onSave() {
+  onPressed() {
+    if (widget.note != null) {
+      final oldNote = widget.note;
+      dbService.updateNote(
+          id: oldNote['id'],
+          title: titleController.text,
+          body: bodyController.text);
+      Navigator.pop(context);
+      return;
+    }
+
     dbService.addNote(
       body: bodyController.text,
-      noteTitle: bodyController.text,
+      noteTitle: titleController.text,
     );
+    Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Add new note")),
+      appBar: AppBar(
+          title: Text(widget.note != null ? "Update note" : "Add new note")),
       bottomNavigationBar: MaterialButton(
         color: Colors.green,
         onPressed: () {
-          onSave();
+          onPressed();
         },
         child: Text(widget.note != null ? "Update Note" : "Save Note"),
       ),

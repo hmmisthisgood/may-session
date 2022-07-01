@@ -18,11 +18,7 @@ class _HomepageState extends State<Homepage> {
   /// data/user/0/com.sql_app/data/image.jpg
   /// data/user/com.sql_app/iuabgjpabjewgbawg/
 
-  int _dbVersion = 1;
-
-  late Database sqlDb;
   List<Map<String, Object?>> notesList = [];
-  DbService dbService = DbService();
 
   @override
   void initState() {
@@ -31,11 +27,14 @@ class _HomepageState extends State<Homepage> {
   }
 
   initDbAndGetNotes() async {
+    DbService dbService = DbService.instance;
     await dbService.configureDb();
     getNotes();
   }
 
   getNotes() async {
+    DbService dbService = DbService.instance;
+
     final val = await dbService.getNotes();
 
     notesList = val;
@@ -70,11 +69,12 @@ class _HomepageState extends State<Homepage> {
                 return InkWell(
                   onTap: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => NewNoteScreen(
-                                  note: note,
-                                )));
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => NewNoteScreen(note: note)))
+                        .then((value) {
+                      getNotes();
+                    });
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -83,10 +83,26 @@ class _HomepageState extends State<Homepage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            note['title'].toString(),
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                note['title'].toString(),
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                              InkWell(
+                                onTap: () async {
+                                  await DbService.instance.deleteNote(
+                                      int.parse(note['id'].toString()));
+                                  getNotes();
+                                },
+                                child: Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ],
                           ),
                           SizedBox(height: 10),
                           Text(

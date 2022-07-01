@@ -7,6 +7,14 @@ class DbService {
   late Database sqlDb;
 
   ///
+  // DbService();
+  DbService._internal() {
+    ///
+  }
+
+  static DbService _service = DbService._internal();
+
+  static DbService get instance => _service;
 
   static const int _dbVersion = 1;
 
@@ -94,7 +102,7 @@ phoneNumber VARCHAR
     sqlDb.update(
       _notesTable,
       {"title": title, "body": body},
-      where: "id?",
+      where: "id=?",
       whereArgs: [id],
     );
 
@@ -105,8 +113,8 @@ phoneNumber VARCHAR
   }
 
   deleteNote(int id) {
-    sqlDb.delete(_notesTable, where: "id?", whereArgs: [id]);
-    final deleteQuery = '''  DELETE FROM notes   WHERE id=$id''';
+    return sqlDb.delete(_notesTable, where: "id=?", whereArgs: [id]);
+    // final deleteQuery = '''  DELETE FROM notes   WHERE id=$id''';
 
     // sqlDb.rawDelete(deleteQuery)
   }
