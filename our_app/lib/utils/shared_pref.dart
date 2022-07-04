@@ -12,7 +12,6 @@ class SharedPref {
   static Future<bool> getUserLoggedIn() async {
     final _pref = await SharedPreferences.getInstance();
     var _isLoggedIn = _pref.getBool(_hasUserLoggedIn);
-
     return _isLoggedIn ?? false;
   }
 }

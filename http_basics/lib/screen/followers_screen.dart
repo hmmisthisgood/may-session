@@ -34,6 +34,10 @@ class _FollowersScreenState extends State<FollowersScreen> {
   fetchUsers() async {
     final endpoint = "https://11111jsonplaceholder.typicode.com/users";
     final uri = Uri.parse(endpoint);
+
+    double some = 10.25;
+
+    some.toStringAsFixed(2);
     try {
       isLoading = true;
       setState(() {});

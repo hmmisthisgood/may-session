@@ -4,6 +4,7 @@ import 'package:our_app/screen/page_view_screen.dart';
 import 'package:our_app/screen/profile_screen.dart';
 import 'package:our_app/utils/shared_pref.dart';
 import 'package:our_app/widget/common_text_field.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../navigation/routes.dart';
 import 'ig_screen_with_tabbar.dart';
@@ -196,7 +197,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               MaterialButton(
-                onPressed: () {
+                onPressed: () async {
                   FocusScope.of(context).unfocus();
 
                   // final phone = phoneController.text;
@@ -220,6 +221,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   // Navigator.pushReplacement(context, route);
                   Navigator.pushNamed(context, Routes.dashboard);
                   SharedPref.setHasUserLoggedIn(true);
+
+                  SharedPreferences instance =
+                      await SharedPreferences.getInstance();
+                  instance.setBool("isUserLoggedIn", true);
+
                   // Navigator.pushAndRemoveUntil(
                   //   context,
                   //   route,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:our_app/utils/assets.dart';
 import 'package:our_app/utils/shared_pref.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../navigation/routes.dart';
 
@@ -20,6 +21,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   checkUserLoggedInAndNavigate() async {
     final isLoggedIn = await SharedPref.getUserLoggedIn();
+
+    SharedPreferences instance = await SharedPreferences.getInstance();
+    instance.getBool("isLoggedIn");
 
     await delayNavigation(isLoggedIn);
   }
