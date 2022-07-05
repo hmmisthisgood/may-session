@@ -1,6 +1,4 @@
 import 'package:bloc_app/bloc/counter/counter_bloc.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,6 +11,7 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("build called");
+
     return Scaffold(
       appBar: AppBar(),
       body: Container(

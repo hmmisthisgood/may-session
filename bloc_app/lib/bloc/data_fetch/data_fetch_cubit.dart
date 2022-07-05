@@ -9,7 +9,7 @@ class DataFetchCubit extends Cubit<DataFetchState> {
   final Dio _dio = Dio(BaseOptions(receiveDataWhenStatusError: true));
 
   fetchVideos() async {
-    final endpoint = "https://111111111pixabay.com/api/videos";
+    final endpoint = "https://pixabay.com/api/videos";
 
     emit(DataFetchLoading());
 
@@ -25,6 +25,7 @@ class DataFetchCubit extends Cubit<DataFetchState> {
 
       // final decoded = json.decode(body); // not necessary to decode the reposnde data
       final List hits = body['hits'];
+      print(hits);
       final List<Video> tempVideos =
           hits.map((e) => Video.convertFromJson(e)).toList();
       // videosList = tempVideos; // 0x1211
