@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "402797244391",
+    "project_id": "brodway-may",
+    "storage_bucket": "brodway-may.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:402797244391:android:7b8c424037dee8d93e1742",
+        "android_client_info": {
+          "package_name": "com.example.firebase_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "402797244391-4co7sujipnml78oeuthf856rurh1gdav.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeMalZikTN-ZBU986eGjYQUJalnTz2-yc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "402797244391-4co7sujipnml78oeuthf856rurh1gdav.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
