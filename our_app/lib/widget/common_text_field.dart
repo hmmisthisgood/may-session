@@ -29,6 +29,8 @@ class CommonTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _txt = Theme.of(context).textTheme;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: TextFormField(
@@ -39,6 +41,7 @@ class CommonTextField extends StatelessWidget {
         textInputAction: textInputAction,
         keyboardType: keyboardType,
         maxLines: maxLines,
+
         style: TextStyle(color: Colors.cyan),
         onChanged: onChanged,
         onFieldSubmitted: onFieldSubmitted,
@@ -48,7 +51,7 @@ class CommonTextField extends StatelessWidget {
           fillColor: Colors.yellow,
           focusColor: Colors.brown,
           hintText: hintText,
-          hintStyle: TextStyle(color: Colors.grey),
+          hintStyle: _txt.bodyText1,
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
           border: OutlineInputBorder(), // UnderlineInputBorder,

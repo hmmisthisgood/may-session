@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:our_app/screen/listview_screen.dart';
+import 'package:our_app/utils/custom_theme.dart';
 
 import 'home.dart';
 import 'navigation/our_route_generator.dart';
@@ -24,11 +26,10 @@ class OurApp extends StatelessWidget {
       title: "Our app",
       onGenerateRoute: ourAwesomeRouteGenerator,
       initialRoute: Routes.splash,
-      theme: ThemeData(
-        // fontFamily: "Allura",
-        primarySwatch: Colors.purple,
-        // scaffoldBackgroundColor: Colors.black.withOpacity(0.3),
-      ),
+      // darkTheme: ,
+      themeMode: ThemeMode.system,
+      theme: CustomTheme.lightTheme,
+      darkTheme: CustomTheme.darkTheme,
     );
   }
 }

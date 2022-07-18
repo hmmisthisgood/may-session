@@ -8,9 +8,11 @@ import '../screen/login_screen.dart';
 import '../screen/page_view_screen.dart';
 import 'routes.dart';
 
-Route ourAwesomeRouteGenerator(settings) {
+Route ourAwesomeRouteGenerator(RouteSettings settings) {
   switch (settings.name) {
     case Routes.login:
+      var args = settings.arguments;
+
       return MaterialPageRoute(builder: (_) => LoginScreen());
     case Routes.listview:
       return MaterialPageRoute(builder: (_) => ListViewScreen());
