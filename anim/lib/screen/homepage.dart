@@ -1,3 +1,4 @@
+import 'package:anim/screen/animated_container_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'hero_screen.dart';
@@ -10,6 +11,11 @@ class Homepage extends StatelessWidget {
       "title": "Hero animation",
       "nav_widget": HeroScreen(),
       "color": Colors.green,
+    },
+    {
+      "title": "Animated container",
+      "nav_widget": AnimContianerScreen(),
+      "color": Colors.red,
     },
   ];
   @override
