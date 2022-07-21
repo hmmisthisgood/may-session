@@ -1,4 +1,5 @@
 import 'package:anim/screen/animated_container_screen.dart';
+import 'package:anim/screen/transform_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'hero_screen.dart';
@@ -16,6 +17,11 @@ class Homepage extends StatelessWidget {
       "title": "Animated container",
       "nav_widget": AnimContianerScreen(),
       "color": Colors.red,
+    },
+    {
+      "title": "Transform screen",
+      "nav_widget": TransformScreen(),
+      "color": Colors.black,
     },
   ];
   @override
