@@ -1,3 +1,4 @@
+import 'package:anim/navigation/custom_route.dart';
 import 'package:anim/screen/animated_container_screen.dart';
 import 'package:anim/screen/transform_screen.dart';
 import 'package:flutter/material.dart';
@@ -44,8 +45,14 @@ class Homepage extends StatelessWidget {
           return MaterialButton(
             color: page['color'],
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => page["nav_widget"]));
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (_) => page["nav_widget"]));
+
+              // Navigator.push(context, UpRoute(page["nav_widget"]));
+
+              Navigator.push(context, UpRoute(LottieScreen()));
+
+              Navigator.push(context, buildPage(LottieScreen()));
             },
             child: Text(
               page["title"],
