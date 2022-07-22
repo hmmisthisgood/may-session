@@ -1,13 +1,17 @@
 import 'package:bloc_app/bloc/data_fetch/data_fetch_cubit.dart';
 import 'package:bloc_app/bloc/data_fetch/data_fetch_state.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
+import 'package:permission_handler/permission_handler.dart';
+// import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../main.dart';
 import '../model/video.dart';
+import '../widget/app_env.dart';
 
 class VideosScreen extends StatefulWidget {
   const VideosScreen({Key? key, required this.screenTitle}) : super(key: key);
@@ -18,11 +22,15 @@ class VideosScreen extends StatefulWidget {
 
 class _VideosScreenState extends State<VideosScreen> {
   final ScrollController scrollController = ScrollController();
+  // final refrshController = RefreshController();
   int count = 0;
 
   @override
   void initState() {
     super.initState();
+
+    askPermissions();
+
     BlocProvider.of<DataFetchCubit>(context).fetchVideos();
     RepositoryProvider.of<Test>(context).doSomething();
     // context.read<DataFetchCubit>().fetchVideos(); // both this and above line are same
@@ -53,12 +61,38 @@ class _VideosScreenState extends State<VideosScreen> {
     Navigator.pushNamed(context, "/test");
   }
 
+  askPermissions() async {
+    final locPermission = await Permission.location.status;
+
+    final bluetoothPerm = await Permission.bluetooth;
+    bluetoothPerm.request();
+    Permission.location.request();
+
+    if (locPermission.isDenied) {
+      Permission.location.request();
+    }
+
+    Permission.storage.request();
+  }
+
   @override
   Widget build(BuildContext context) {
     print("build");
 
+    final appEnv = AppEnv.of(context);
+
+    print("app env is :" + appEnv.env);
+
     return Scaffold(
-      appBar: AppBar(title: Text(widget.screenTitle)),
+      appBar: AppBar(title: Text(AppEnv.of(context).env)),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          // final result = await FilePicker.platform.pickFiles();
+
+          AppEnv.of(context).changeEnv("dev");
+          // result.files
+        },
+      ),
       body: Center(
         child: BlocConsumer<DataFetchCubit, DataFetchState>(
           listener: (context, state) {
@@ -95,22 +129,13 @@ class _VideosScreenState extends State<VideosScreen> {
                 textAlign: TextAlign.center,
               );
             }
-            if (state is DataFetchSuccess) {
-              return ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  controller: scrollController,
-                  itemCount: state.data.length,
-                  itemBuilder: (context, index) {
-                    Video currentVideo = state.data[index];
-                    return Image.network(currentVideo.userImageUrl);
-                  });
-            }
-
-            if (state is LoadingMoreData) {
+            if (state is DataFetchSuccess ||
+                state is LoadingMoreData ||
+                state is LoadingMoreError) {
               return Column(
                 children: [
                   Expanded(
-                    child: ListView.builder(
+                    child: new ListView.builder(
                         physics: BouncingScrollPhysics(),
                         controller: scrollController,
                         itemCount: state.data.length,
@@ -120,10 +145,11 @@ class _VideosScreenState extends State<VideosScreen> {
                         }),
                   ),
                   SizedBox(height: 19),
-                  CircularProgressIndicator()
+                  if (state is LoadingMoreData) CircularProgressIndicator()
                 ],
               );
             }
+
             return Text("Unknown state");
           },
         ),
@@ -142,3 +168,8 @@ class _VideosScreenState extends State<VideosScreen> {
 /// 
 /// 7. MultiRepositoryProvider
 
+
+
+//  for refrshing data
+// 1. pull to refrsh: pub packagte
+//2. RefreshIndicator

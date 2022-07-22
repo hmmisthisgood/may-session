@@ -2,6 +2,8 @@ import 'package:bloc_app/bloc/counter/counter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../widget/app_env.dart';
+
 class Homepage extends StatelessWidget {
   Homepage({Key? key}) : super(key: key);
   final CounterCubit cubit = CounterCubit();
@@ -12,6 +14,9 @@ class Homepage extends StatelessWidget {
   Widget build(BuildContext context) {
     print("build called");
 
+    final appEnv = AppEnv.of(context);
+
+    print("app env is :" + appEnv.env);
     return Scaffold(
       appBar: AppBar(),
       body: Container(

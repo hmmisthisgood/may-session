@@ -1,4 +1,7 @@
-abstract class DataFetchState {}
+abstract class DataFetchState {
+  final List data;
+  DataFetchState({this.data = const []});
+}
 
 class DataInitial extends DataFetchState {}
 
@@ -15,7 +18,7 @@ class DataFetchError extends DataFetchState {
 
 class DataFetchSuccess extends DataFetchState {
   final List data;
-  DataFetchSuccess({required this.data});
+  DataFetchSuccess({required this.data}) : super(data: data);
 }
 
 /// Loading More Data - Infinite Scroll view or lazy loading
@@ -24,13 +27,14 @@ class DataFetchSuccess extends DataFetchState {
 
 class LoadingMoreData extends DataFetchState {
   final List data;
-  LoadingMoreData({required this.data});
+  LoadingMoreData({required this.data}) : super(data: data);
 }
 
 class LoadingMoreError extends DataFetchState {
   final List data;
   final String errorMessage;
-  LoadingMoreError({required this.data, required this.errorMessage});
+  LoadingMoreError({required this.data, required this.errorMessage})
+      : super(data: data);
 }
 
 /// Data refreshing

@@ -5,10 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 
 class DataFetchCubit extends Cubit<DataFetchState> {
-  DataFetchCubit() : super(DataInitial());
+  DataFetchCubit({required this.apiUrl}) : super(DataInitial());
 
+  final String apiUrl;
   final Dio _dio = Dio(BaseOptions(receiveDataWhenStatusError: true));
-  final endpoint = "https://pixabay.com/api/videos";
+  // final endpoint = "https://pixabay.com/api/videos";
 
   int _currentPage = 1;
 
@@ -18,7 +19,7 @@ class DataFetchCubit extends Cubit<DataFetchState> {
     emit(DataFetchLoading());
 
     try {
-      final response = await _dio.get(endpoint, queryParameters: {
+      final response = await _dio.get(apiUrl, queryParameters: {
         "key": PixabayApiKey,
         "q": "cars",
         "per_page": 5
@@ -52,7 +53,7 @@ class DataFetchCubit extends Cubit<DataFetchState> {
     _currentPage++; //3
 
     try {
-      final response = await _dio.get(endpoint, queryParameters: {
+      final response = await _dio.get(apiUrl, queryParameters: {
         "key": PixabayApiKey,
         "q": "cars",
         "page": _currentPage,
