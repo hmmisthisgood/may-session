@@ -3,6 +3,7 @@ import 'package:anim/screen/transform_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'hero_screen.dart';
+import 'lottie_screen.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({Key? key}) : super(key: key);
@@ -22,6 +23,11 @@ class Homepage extends StatelessWidget {
       "title": "Transform screen",
       "nav_widget": TransformScreen(),
       "color": Colors.black,
+    },
+    {
+      "title": "Lottie screen",
+      "nav_widget": LottieScreen(),
+      "color": Colors.purple,
     },
   ];
   @override
