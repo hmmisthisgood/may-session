@@ -21,7 +21,7 @@ class UpRoute extends PageRoute {
   bool get maintainState => true;
 
   @override
-  Duration get transitionDuration => Duration(milliseconds: 5000);
+  Duration get transitionDuration => Duration(milliseconds: 1);
 
   @override
   Duration get reverseTransitionDuration => Duration(seconds: 1);

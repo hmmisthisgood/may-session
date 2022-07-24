@@ -1,8 +1,10 @@
 import 'package:anim/navigation/custom_route.dart';
 import 'package:anim/screen/animated_container_screen.dart';
+import 'package:anim/screen/custom_painter_screen.dart';
 import 'package:anim/screen/transform_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'custom_clipper_screen.dart';
 import 'hero_screen.dart';
 import 'lottie_screen.dart';
 
@@ -30,6 +32,16 @@ class Homepage extends StatelessWidget {
       "nav_widget": LottieScreen(),
       "color": Colors.purple,
     },
+    {
+      "title": "Custom clipper screen",
+      "nav_widget": CCliperScreen(),
+      "color": Colors.orange,
+    },
+    {
+      "title": "Custom painter screen",
+      "nav_widget": CPainterScreen(),
+      "color": Colors.blue,
+    },
   ];
   @override
   Widget build(BuildContext context) {
@@ -48,11 +60,11 @@ class Homepage extends StatelessWidget {
               // Navigator.push(context,
               //     MaterialPageRoute(builder: (_) => page["nav_widget"]));
 
-              // Navigator.push(context, UpRoute(page["nav_widget"]));
+              Navigator.push(context, UpRoute(page["nav_widget"]));
 
-              Navigator.push(context, UpRoute(LottieScreen()));
+              // Navigator.push(context, UpRoute(LottieScreen()));
 
-              Navigator.push(context, buildPage(LottieScreen()));
+              // Navigator.push(context, buildPage(LottieScreen()));
             },
             child: Text(
               page["title"],
