@@ -1,6 +1,6 @@
 name: our_app
 
-version: 1.0.0+1
+version: 1.0.0+10
 
 environment:
   sdk: ">=2.16.1 <3.0.0"

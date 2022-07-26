@@ -5,9 +5,9 @@
 
 
    <application
-        android:label="our_app"
+        android:label="We deliver"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/scooter">
 
 
         <activity
